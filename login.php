@@ -20,7 +20,7 @@
 
         <div class="login-card">
 
-            <h1>WELCOME!</h1>
+            <h2>WELCOME!</h2>
 
             <p>
                 Login untuk melanjutkan perjalananmu
