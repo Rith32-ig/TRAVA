@@ -129,7 +129,7 @@ iframe {
         height: 250px;
     }
 }
-/* RESET */
+/* ================= RESET ================= */
 
 *{
     margin:0;
@@ -142,7 +142,7 @@ body{
     overflow:hidden;
 }
 
-/* PAGE */
+/* ================= PAGE ================= */
 
 .login-page{
 
@@ -151,18 +151,19 @@ body{
 
     background:
     linear-gradient(
-        rgba(0,0,0,0.40),
-        rgba(0,0,0,0.40)
+        rgba(0,0,0,0.35),
+        rgba(0,0,0,0.35)
     ),
     url('/TRAVA/assets/img/bg-login.png');
 
     background-size:cover;
     background-position:center;
+    background-repeat:no-repeat;
 
     position:relative;
 }
 
-/* NAVBAR */
+/* ================= NAVBAR ================= */
 
 .login-navbar{
 
@@ -173,74 +174,36 @@ body{
     left:0;
 
     display:flex;
-    justify-content:space-between;
+    justify-content:flex-start;
     align-items:center;
 
-    padding:25px 60px;
+    padding:28px 55px;
 
     z-index:10;
 }
 
-/* LOGO */
+/* ================= LOGO ================= */
 
 .logo-area{
 
     display:flex;
     align-items:center;
-    gap:15px;
 }
 
 .logo-img{
 
-    width:80px;
-    height:80px;
+    width:280px;
+    height:auto;
 
     object-fit:contain;
 
-    filter:drop-shadow(
-        0 0 10px rgba(255,255,255,0.4)
+    filter:
+    drop-shadow(
+        0 0 15px rgba(255,255,255,0.25)
     );
 }
 
-.logo-area span{
-
-    color:white;
-
-    font-size:42px;
-
-    font-weight:bold;
-
-    letter-spacing:3px;
-}
-
-/* MENU */
-
-.nav-menu{
-
-    display:flex;
-
-    gap:35px;
-}
-
-.nav-menu a{
-
-    color:white;
-
-    text-decoration:none;
-
-    font-size:16px;
-
-    font-weight:500;
-
-    transition:0.3s;
-}
-
-.nav-menu a:hover{
-
-    opacity:0.7;
-}
-
-/* LOGIN BOX */
+/* ================= LOGIN BOX ================= */
 
 .login-box{
 
@@ -254,51 +217,55 @@ body{
     padding-right:120px;
 }
 
-/* CARD */
+/* ================= CARD ================= */
 
 .login-card{
 
-    width:420px;
+    width:430px;
 
-    padding:50px;
+    padding:55px 45px;
 
-    border-radius:30px;
+    border-radius:32px;
 
-    background:rgba(255,255,255,0.15);
+    background:
+    rgba(255,255,255,0.12);
 
-    backdrop-filter:blur(14px);
+    backdrop-filter:blur(16px);
 
-    border:1px solid rgba(255,255,255,0.2);
+    border:
+    1px solid rgba(255,255,255,0.2);
 
     box-shadow:
-    0 10px 30px rgba(0,0,0,0.3);
+    0 12px 35px rgba(0,0,0,0.3);
 
     color:white;
 
     text-align:center;
 }
 
-/* TITLE */
+/* ================= TITLE ================= */
 
 .login-card h1{
 
-    font-size:64px;
+    font-size:68px;
+
+    font-weight:bold;
 
     margin-bottom:10px;
 
-    font-weight:bold;
+    letter-spacing:2px;
 }
 
 .login-card p{
 
-    margin-bottom:35px;
+    font-size:20px;
 
-    opacity:0.9;
+    opacity:0.92;
 
-    font-size:18px;
+    margin-bottom:38px;
 }
 
-/* INPUT */
+/* ================= INPUT ================= */
 
 .input-box{
 
@@ -308,16 +275,17 @@ body{
 .input-box input{
 
     width:100%;
-    height:55px;
+    height:58px;
 
     border:none;
     outline:none;
 
-    border-radius:14px;
+    border-radius:16px;
 
-    padding:0 18px;
+    padding:0 20px;
 
-    background:rgba(255,255,255,0.22);
+    background:
+    rgba(255,255,255,0.22);
 
     color:white;
 
@@ -326,27 +294,28 @@ body{
 
 .input-box input::placeholder{
 
-    color:rgba(255,255,255,0.85);
+    color:
+    rgba(255,255,255,0.85);
 }
 
-/* BUTTON */
+/* ================= BUTTON ================= */
 
 .btn-login{
 
     width:100%;
-    height:55px;
+    height:58px;
 
     border:none;
 
-    border-radius:14px;
+    border-radius:16px;
 
     background:white;
 
-    color:#2b5cff;
+    color:#246BFD;
+
+    font-size:17px;
 
     font-weight:bold;
-
-    font-size:16px;
 
     cursor:pointer;
 
@@ -355,20 +324,21 @@ body{
 
 .btn-login:hover{
 
-    transform:translateY(-3px);
+    transform:
+    translateY(-3px);
 
-    background:#f3f3f3;
+    background:#f2f2f2;
 }
 
-/* REGISTER */
+/* ================= REGISTER ================= */
 
 .register-link{
 
-    margin-top:22px;
-
-    color:white;
+    margin-top:24px;
 
     font-size:15px;
+
+    color:white;
 }
 
 .register-link a{
@@ -385,7 +355,7 @@ body{
     text-decoration:underline;
 }
 
-/* RESPONSIVE */
+/* ================= RESPONSIVE ================= */
 
 @media(max-width:992px){
 
@@ -399,37 +369,34 @@ body{
 
 @media(max-width:768px){
 
+    body{
+        overflow:auto;
+    }
+
     .login-navbar{
 
         padding:20px;
     }
 
-    .nav-menu{
-
-        display:none;
-    }
-
     .logo-img{
 
-        width:60px;
-        height:60px;
-    }
-
-    .logo-area span{
-
-        font-size:32px;
+        width:200px;
     }
 
     .login-card{
 
         width:90%;
 
-        padding:35px 25px;
+        padding:40px 28px;
     }
 
     .login-card h1{
 
-        font-size:48px;
+        font-size:50px;
     }
 
+    .login-card p{
+
+        font-size:16px;
+    }
 }

@@ -11,8 +11,6 @@
             <img src="/TRAVA/assets/img/logo-trava.png"
             class="logo-img">
 
-            <span>TRAVA</span>
-
         </div>
 
     </div>
