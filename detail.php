@@ -1,31 +1,68 @@
 <?php
+session_start();
+
 include 'config/koneksi.php';
 include 'admin/partials/header.php';
 include 'admin/partials/navbar.php';
 
 $id = $_GET['id'];
 
-$query = mysqli_query($conn, "SELECT * FROM wisata WHERE id='$id'");
+$query = mysqli_query($conn,
+"SELECT * FROM wisata WHERE id='$id'");
+
 $data = mysqli_fetch_assoc($query);
 
 $review = mysqli_query($conn, "
-    SELECT review.*, users.nama 
-    FROM review
-    JOIN users ON review.user_id = users.id
-    WHERE wisata_id='$id'
-    ORDER BY created_at DESC
+SELECT review.*, users.nama
+FROM review
+JOIN users ON review.user_id = users.id
+WHERE wisata_id='$id'
+ORDER BY created_at DESC
 ");
 ?>
+
+<style>
+
+.rating{
+    display:flex;
+    flex-direction: row-reverse;
+    justify-content:flex-end;
+    gap:5px;
+}
+
+.rating input{
+    display:none;
+}
+
+.rating label{
+    font-size:40px;
+    color:#ccc;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.rating input:checked ~ label{
+    color:gold;
+}
+
+.rating label:hover,
+.rating label:hover ~ label{
+    color:gold;
+}
+
+</style>
 
 <div class="container mt-4 mb-5">
 
     <!-- GAMBAR -->
     <div class="card overflow-hidden border-0 shadow mb-4">
-        <img 
-            src="assets/img/<?= $data['gambar']; ?>" 
+
+        <img
+            src="assets/img/<?= $data['gambar']; ?>"
             class="w-100"
             style="height:450px; object-fit:cover;"
         >
+
     </div>
 
     <div class="row">
@@ -133,18 +170,120 @@ $review = mysqli_query($conn, "
             Review Pengunjung
         </h4>
 
-        <?php while($r = mysqli_fetch_assoc($review)) : ?>
+        <!-- FORM REVIEW -->
+        <?php if(isset($_SESSION['login'])) : ?>
+
+        <div class="card border-0 shadow-sm p-4 mb-4">
+
+            <h5 class="mb-3">
+                Tulis Review
+            </h5>
+
+            <form action="proses/review_proses.php" method="POST">
+
+                <input
+                    type="hidden"
+                    name="wisata_id"
+                    value="<?= $id; ?>"
+                >
+
+                <!-- RATING BINTANG -->
+                <div class="mb-3">
+
+                    <label class="form-label mb-2">
+                        Rating
+                    </label>
+
+                    <div class="rating">
+
+                        <input type="radio" name="rating" value="5" id="star5" required>
+                        <label for="star5">★</label>
+
+                        <input type="radio" name="rating" value="4" id="star4">
+                        <label for="star4">★</label>
+
+                        <input type="radio" name="rating" value="3" id="star3">
+                        <label for="star3">★</label>
+
+                        <input type="radio" name="rating" value="2" id="star2">
+                        <label for="star2">★</label>
+
+                        <input type="radio" name="rating" value="1" id="star1">
+                        <label for="star1">★</label>
+
+                    </div>
+
+                </div>
+
+                <!-- KOMENTAR -->
+                <div class="mb-3">
+
+                    <label class="form-label">
+                        Komentar
+                    </label>
+
+                    <textarea
+                        name="komentar"
+                        class="form-control"
+                        rows="4"
+                        required
+                    ></textarea>
+
+                </div>
+
+                <button class="btn btn-primary">
+                    Kirim Review
+                </button>
+
+            </form>
+
+        </div>
+
+        <?php else : ?>
+
+        <div class="alert alert-warning">
+            Login terlebih dahulu untuk memberi review
+        </div>
+
+        <?php endif; ?>
+
+
+        <!-- LIST REVIEW -->
+        <?php if(mysqli_num_rows($review) > 0) : ?>
+
+            <?php while($r = mysqli_fetch_assoc($review)) : ?>
 
             <div class="card border-0 shadow-sm mb-3">
 
                 <div class="card-body">
 
-                    <h6 class="fw-bold">
-                        <?= $r['nama']; ?>
-                    </h6>
+                    <div class="d-flex justify-content-between align-items-center mb-2">
 
-                    <div class="text-warning mb-2">
-                        ⭐ <?= $r['rating']; ?>/5
+                        <h6 class="fw-bold mb-0">
+                            <?= $r['nama']; ?>
+                        </h6>
+
+                        <small class="text-muted">
+                            <?= date('d M Y', strtotime($r['created_at'])); ?>
+                        </small>
+
+                    </div>
+
+                    <!-- BINTANG REVIEW -->
+                    <div class="text-warning mb-2" style="font-size:20px;">
+
+                    <?php
+                    for($i=1; $i<=5; $i++){
+
+                        if($i <= $r['rating']){
+                            echo "⭐";
+                        }else{
+                            echo "☆";
+                        }
+
+                    }
+                    ?>
+
                     </div>
 
                     <p class="mb-0">
@@ -155,7 +294,15 @@ $review = mysqli_query($conn, "
 
             </div>
 
-        <?php endwhile; ?>
+            <?php endwhile; ?>
+
+        <?php else : ?>
+
+            <div class="alert alert-secondary">
+                Belum ada review
+            </div>
+
+        <?php endif; ?>
 
     </div>
 

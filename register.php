@@ -2,7 +2,7 @@
 
 <body class="login-page">
 
-    <!-- NAVBAR -->
+    <!-- LOGO -->
     <div class="login-navbar">
 
         <div class="logo-area">
@@ -14,19 +14,30 @@
 
     </div>
 
-    <!-- LOGIN BOX -->
+    <!-- BOX -->
     <div class="login-box">
 
         <div class="login-card">
 
-            <h2>WELCOME!</h2>
+            <h2>SIGN UP!</h2>
 
             <p>
-                Login untuk melanjutkan perjalananmu
+                Buat akun dan mulai jelajahi
+                wisata terbaik Cirebon
             </p>
 
-            <form action="proses/proses_login.php"
+            <form action="proses/proses_register.php"
             method="POST">
+
+                <!-- NAMA -->
+                <div class="input-box">
+
+                    <input type="text"
+                    name="nama"
+                    placeholder="Nama Lengkap"
+                    required>
+
+                </div>
 
                 <!-- EMAIL -->
                 <div class="input-box">
@@ -52,19 +63,19 @@
                 <button type="submit"
                 class="btn-login">
 
-                    Login
+                    Register
 
                 </button>
 
             </form>
 
-            <!-- REGISTER -->
+            <!-- LINK -->
             <div class="register-link">
 
-                Belum punya akun?
+                Sudah punya akun?
 
-                <a href="register.php">
-                    Daftar
+                <a href="login.php">
+                    Login
                 </a>
 
             </div>

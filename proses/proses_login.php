@@ -1,5 +1,4 @@
 <?php
-
 session_start();
 include '../config/koneksi.php';
 
@@ -11,31 +10,18 @@ $query = mysqli_query($conn,
 WHERE email='$email'
 AND password='$password'");
 
-$data = mysqli_fetch_assoc($query);
+if(mysqli_num_rows($query) > 0){
 
-if($data){
+    $data = mysqli_fetch_assoc($query);
 
-    $_SESSION['id'] = $data['id'];
+    $_SESSION['login'] = true;
+    $_SESSION['user_id'] = $data['id'];
     $_SESSION['nama'] = $data['nama'];
     $_SESSION['role'] = $data['role'];
 
-    if($data['role'] == 'admin'){
-
-        header("Location: ../admin");
-
-    }else{
-
-        header("Location: ../index.php");
-
-    }
+    header("Location: ../index.php");
+    exit;
 
 }else{
-
-    echo "
-    <script>
-        alert('Email atau password salah!');
-        window.location='../login.php';
-    </script>
-    ";
-
+    header("Location: ../login.php?pesan=gagal");
 }
